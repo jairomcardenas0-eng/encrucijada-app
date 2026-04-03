@@ -6,16 +6,42 @@
   <title>Encrucijada Noticias</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body, html { width: 100%; height: 100%; overflow: hidden; }
+    body, html { width: 100%; height: 100%; background: #000; }
+    #loader {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      transition: opacity 0.4s ease;
+    }
+    #loader img {
+      width: 100px;
+      height: 100px;
+      border-radius: 20px;
+    }
     iframe {
       width: 100%;
       height: 100%;
       border: none;
-      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
     }
   </style>
 </head>
 <body>
-  <iframe src="https://encrucijadanoticias.com"></iframe>
+  <div id="loader">
+    <img src="icon.png" alt="logo"/>
+  </div>
+  <iframe 
+    id="webview"
+    src="https://encrucijadanoticias.com"
+    sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-top-navigation"
+    onload="document.getElementById('loader').style.opacity='0';setTimeout(()=>document.getElementById('loader').style.display='none',400)">
+  </iframe>
 </body>
 </html>
