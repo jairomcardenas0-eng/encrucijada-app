@@ -26,6 +26,9 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Install Capacitor CLI
+        run: npm install @capacitor/cli
+
       - name: Sync Capacitor
         run: npx cap sync android
 
