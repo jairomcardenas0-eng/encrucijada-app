@@ -9,9 +9,9 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import androidx.appcompat.app.AppCompatActivity;
+import com.getcapacitor.BridgeActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BridgeActivity {
 
     private WebView webView;
 
@@ -30,22 +30,20 @@ public class MainActivity extends AppCompatActivity {
         settings.setUseWideViewPort(true);
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        settings.setMediaPlaybackRequiresUserGesture(false);
 
-        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         webView.setBackgroundColor(0xFFFFFFFF);
-
+        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         webView.setWebChromeClient(new WebChromeClient());
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                view.setVisibility(View.INVISIBLE);
+                view.setBackgroundColor(0xFFFFFFFF);
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                view.setVisibility(View.VISIBLE);
+                view.setBackgroundColor(0xFFFFFFFF);
             }
 
             @Override
