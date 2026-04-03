@@ -9,6 +9,7 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.content.Intent;
 import com.getcapacitor.BridgeActivity;
 
 public class MainActivity extends BridgeActivity {
@@ -48,7 +49,17 @@ public class MainActivity extends BridgeActivity {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                view.loadUrl(request.getUrl().toString());
+                String url = request.getUrl().toString();
+                if (url.startsWith("whatsapp://") || 
+                    url.startsWith("intent://") ||
+                    url.startsWith("mailto:") ||
+                    url.startsWith("tel:")) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, 
+                        android.net.Uri.parse(url));
+                    startActivity(intent);
+                    return true;
+                }
+                view.loadUrl(url);
                 return true;
             }
         });
